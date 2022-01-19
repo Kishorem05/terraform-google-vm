@@ -48,6 +48,13 @@ resource "google_compute_instance_from_template" "compute_instance" {
     network_ip         = length(var.static_ips) == 0 ? "" : element(local.static_ips, count.index)
   }
 
+  network_interface {
+    network            = var.network
+    subnetwork         = var.subnetwork
+    subnetwork_project = var.subnetwork_project
+    network_ip         = length(var.static_ips) == 0 ? "" : element(local.static_ips, count.index)
+  }
+
   source_instance_template = var.instance_template
 }
 
